@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VitalLink - Seguimiento de pacientes en tiempo real</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #1b2a3a;
+    background-color: #f4f9fb;
+    line-height: 1.6;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0e6e73;
+    padding: 18px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  nav .logo {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+  }
+
+  nav ul li a {
+    color: #e6f7f7;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  nav ul li a:hover {
+    color: #ffd166;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #0e6e73 0%, #14989f 100%);
+    color: #ffffff;
+    text-align: center;
+    padding: 100px 20px 110px 20px;
+  }
+
+  .hero h1 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+    max-width: 650px;
+    margin: 0 auto 35px auto;
+    color: #eafafa;
+  }
+
+  .btn-primary {
+    background-color: #ffd166;
+    color: #1b2a3a;
+    border: none;
+    padding: 15px 35px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: #ffbc3a;
+    transform: translateY(-2px);
+  }
+
+  .services {
+    padding: 80px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .services h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    color: #0e6e73;
+  }
+
+  .services > p {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 50px auto;
+    color: #4a5c6a;
+  }
+
+  .cards {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 35px 28px;
+    width: 300px;
+    box-shadow: 0 4px 14px rgba(14,110,115,0.12);
+    text-align: left;
+    border-top: 5px solid #14989f;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 22px rgba(14,110,115,0.2);
+  }
+
+  .card h3 {
+    color: #0e6e73;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+
+  .card .highlight {
+    display: inline-block;
+    background-color: #eafafa;
+    color: #0e6e73;
+    font-weight: bold;
+    font-size: 0.9rem;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+  }
+
+  .card p.description {
+    color: #4a5c6a;
+    font-size: 0.98rem;
+  }
+
+  footer {
+    background-color: #0e6e73;
+    color: #eafafa;
+    text-align: center;
+    padding: 25px 20px;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 768px) {
+    nav {
+      flex-direction: column;
+      gap: 15px;
+      padding: 18px 20px;
+    }
+
+    nav ul {
+      gap: 20px;
+    }
+
+    .hero h1 {
+      font-size: 2.1rem;
+    }
+
+    .hero p {
+      font-size: 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">VitalLink</div>
+  <ul>
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="inicio">
+  <h1>Acompaña el tratamiento de tu familiar, estés donde estés</h1>
+  <p>VitalLink conecta a las familias con el proceso médico de sus seres queridos internados, en tiempo real y sin tecnicismos.</p>
+  <button class="btn-primary">Solicitar demo</button>
+</section>
+
+<section class="services" id="servicios">
+  <h2>Nuestros Servicios</h2>
+  <p>Tres pilares diseñados para que ninguna familia se sienta desinformada durante una internación.</p>
+  <div class="cards">
+    <div class="card">
+      <h3>Ruta de Tratamiento</h3>
+      <span class="highlight">En tiempo real</span>
+      <p class="description">Visualiza cada etapa del procedimiento de tu familiar y recibe notificaciones automáticas apenas se completa una fase.</p>
+    </div>
+    <div class="card">
+      <h3>Alertas de Emergencia</h3>
+      <span class="highlight">Notificación inmediata</span>
+      <p class="description">Recibe avisos instantáneos ante cualquier situación urgente relacionada con el paciente, sin demoras ni llamadas perdidas.</p>
+    </div>
+    <div class="card">
+      <h3>Asistente Médico IA</h3>
+      <span class="highlight">Explicaciones simples</span>
+      <p class="description">Una inteligencia artificial traduce términos médicos complejos a un lenguaje claro y cercano para toda la familia.</p>
+    </div>
+  </div>
+</section>
+
+<footer id="contacto">
+  <p>&copy; 2026 VitalLink. Todos los derechos reservados.</p>
+</footer>
+
+</body>
+</html>
