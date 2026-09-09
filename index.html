@@ -78,6 +78,13 @@
     color: #eafafa;
   }
 
+  .hero .disclaimer {
+    font-size: 0.85rem;
+    max-width: 550px;
+    margin: -20px auto 35px auto;
+    color: #cdeeee;
+  }
+
   .btn-primary {
     background-color: #ffd166;
     color: #1b2a3a;
@@ -160,6 +167,40 @@
     font-size: 0.98rem;
   }
 
+  .hospitals {
+    background-color: #eafafa;
+    padding: 60px 40px;
+  }
+
+  .hospitals-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hospitals h3 {
+    color: #0e6e73;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+  }
+
+  .hospital-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .hospital-logos span {
+    font-size: 1.15rem;
+    font-weight: bold;
+    color: #0e6e73;
+    opacity: 0.85;
+  }
+
   footer {
     background-color: #0e6e73;
     color: #eafafa;
@@ -186,6 +227,10 @@
     .hero p {
       font-size: 1rem;
     }
+
+    .hospital-logos {
+      gap: 25px;
+    }
   }
 </style>
 </head>
@@ -203,7 +248,8 @@
 <section class="hero" id="inicio">
   <h1>Acompaña el tratamiento de tu familiar, estés donde estés</h1>
   <p>VitalLink conecta a las familias con el proceso médico de sus seres queridos internados, en tiempo real y sin tecnicismos.</p>
-  <button class="btn-primary">Solicitar demo</button>
+  <p class="disclaimer">Acceso exclusivo para familiares autorizados del paciente. La información médica es confidencial.</p>
+  <button class="btn-primary">Buscar a mi paciente</button>
 </section>
 
 <section class="services" id="servicios">
@@ -211,9 +257,9 @@
   <p>Tres pilares diseñados para que ninguna familia se sienta desinformada durante una internación.</p>
   <div class="cards">
     <div class="card">
-      <h3>Ruta de Tratamiento</h3>
-      <span class="highlight">En tiempo real</span>
-      <p class="description">Visualiza cada etapa del procedimiento de tu familiar y recibe notificaciones automáticas apenas se completa una fase.</p>
+      <h3>Una ruta de tratamiento clara</h3>
+      <span class="highlight">Seguimiento paso a paso</span>
+      <p class="description">VitalLink convierte el tratamiento de tu familiar en una ruta visual: cada estudio, medicamento y procedimiento aparece como una etapa que se marca con un check apenas se completa, para que sepas exactamente en qué punto va el proceso.</p>
     </div>
     <div class="card">
       <h3>Alertas de Emergencia</h3>
@@ -221,9 +267,21 @@
       <p class="description">Recibe avisos instantáneos ante cualquier situación urgente relacionada con el paciente, sin demoras ni llamadas perdidas.</p>
     </div>
     <div class="card">
-      <h3>Asistente Médico IA</h3>
+      <h3>Cómo funciona nuestra IA</h3>
       <span class="highlight">Explicaciones simples</span>
-      <p class="description">Una inteligencia artificial traduce términos médicos complejos a un lenguaje claro y cercano para toda la familia.</p>
+      <p class="description">Nuestra inteligencia artificial lee cada etapa de la ruta de tratamiento y la traduce a un lenguaje claro: explica qué es cada medicamento, procedimiento o término médico, para que toda la familia entienda sin necesidad de conocimientos clínicos.</p>
+    </div>
+  </div>
+</section>
+
+<section class="hospitals">
+  <div class="hospitals-inner">
+    <h3>Ejemplo de hospitales que podrían integrar VitalLink</h3>
+    <div class="hospital-logos">
+      <span>Hospital Santa Fe</span>
+      <span>Clínica Los Robles</span>
+      <span>Hospital del Valle</span>
+      <span>Centro Médico La Esperanza</span>
     </div>
   </div>
 </section>
