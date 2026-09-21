@@ -110,6 +110,7 @@
     padding:18px 54px;cursor:pointer;
     transition:background .25s ease,transform .2s ease;
   }
+  a.btn-primary{display:inline-block;text-decoration:none}
   .btn-primary:hover{background:var(--magenta);transform:translateY(-2px)}
 
   /* SERVICIOS */
@@ -178,7 +179,7 @@
     <button class="close-btn" id="closeBtn">Cerrar ✕</button>
   </div>
   <a href="#inicio">Inicio</a>
-  <a href="#inicio">Iniciar sesión</a>
+  <a href="login.html">Iniciar sesión</a>
   <a href="#servicios">Ayuda</a>
   <a href="#contacto">Contacto</a>
   <a href="#servicios">Información para pacientes</a>
@@ -188,7 +189,7 @@
   <p class="eyebrow">Seguimiento de pacientes en tiempo real</p>
   <h1>MedLoop</h1>
   <p>Acompaña el tratamiento de tu familiar, estés donde estés. En tiempo real y sin tecnicismos.</p>
-  <button class="btn-primary" id="empezar">Empezar</button>
+  <a class="btn-primary" id="empezar" href="login.html">Empezar</a>
 </section>
 
 <section class="services" id="servicios">
@@ -237,6 +238,9 @@
   ov.querySelectorAll('a').forEach(a => a.addEventListener('click', () => open(false)));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') open(false); });
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
