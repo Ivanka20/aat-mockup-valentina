@@ -6,239 +6,137 @@
 <title>MedLoop</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --azul:#060888;
-    --morado:#450688;
-    --magenta:#860688;
-    --papel:#f4f2f7;
-    --card:#ffffff;
-    --texto:#14123a;
-    --suave:#5a5578;
-    --linea:#e2dded;
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --papel:#0a0920;--card:#141230;--texto:#f1eefa;--suave:#b9b2d4;--linea:#2a2650;
-    }
-  }
-  :root[data-theme="dark"]{
-    --papel:#0a0920;--card:#141230;--texto:#f1eefa;--suave:#b9b2d4;--linea:#2a2650;
-  }
-
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    font-family:'Inter',-apple-system,'Segoe UI',Arial,sans-serif;
-    background-color:var(--papel);color:var(--texto);line-height:1.65;
-  }
-
-  /* NAV */
-  nav{
-    display:flex;justify-content:space-between;align-items:center;
-    background:var(--azul);padding:16px 30px;position:sticky;top:0;z-index:200;
-  }
-  nav .logo{color:#fff;font-family:'Fraunces',Georgia,serif;font-size:1.35rem;letter-spacing:.5px}
-  .menu-btn{
-    background:transparent;border:1px solid rgba(255,255,255,.45);color:#fff;
-    font-family:inherit;font-size:.95rem;letter-spacing:.08em;text-transform:uppercase;
-    padding:10px 18px;cursor:pointer;
-  }
-  .menu-btn:hover{background:rgba(255,255,255,.12)}
-
-  /* OVERLAY MENU (panel lateral, mitad de la pantalla) */
-  .backdrop{
-    position:fixed;inset:0;z-index:290;background:rgba(10,9,32,.45);
-    opacity:0;pointer-events:none;transition:opacity .3s ease;
-  }
-  .backdrop.open{opacity:1;pointer-events:auto}
-  .overlay{
-    position:fixed;top:0;right:0;bottom:0;width:50%;z-index:300;background:var(--azul);
-    display:flex;flex-direction:column;overflow-y:auto;
-    transform:translateX(100%);transition:transform .35s ease;
-  }
-  .overlay.open{transform:translateX(0)}
-  .overlay-top{
-    display:flex;justify-content:space-between;align-items:center;
-    padding:16px 24px;border-bottom:1px solid rgba(255,255,255,.18);
-  }
-  .overlay-top .logo{color:#fff;font-family:'Fraunces',Georgia,serif;font-size:1.2rem}
-  .close-btn{
-    background:transparent;border:1px solid rgba(255,255,255,.45);color:#fff;
-    font-family:inherit;font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;
-    padding:9px 16px;cursor:pointer;
-  }
-  .overlay a{
-    display:block;color:#fff;text-decoration:none;
-    font-family:'Fraunces',Georgia,serif;
-    font-size:clamp(1.3rem,3.2vw,2.1rem);line-height:1.2;
-    padding:20px 24px;width:100%;
-    border-bottom:1px solid rgba(255,255,255,.15);
-    transition:background .25s ease,padding-left .25s ease;
-  }
-  .overlay a:hover{background:var(--magenta);padding-left:36px}
-
-  @media (max-width:768px){
-    .overlay{width:80%}
-  }
-
-  /* HERO */
-  .hero{
-    text-align:center;padding:96px 24px 104px;
-    background:
-      radial-gradient(900px 420px at 50% -10%, rgba(134,6,136,.14), transparent 70%),
-      radial-gradient(700px 380px at 10% 110%, rgba(6,8,136,.12), transparent 70%);
-    border-bottom:1px solid var(--linea);
-  }
-  .eyebrow{
-    text-transform:uppercase;letter-spacing:.22em;font-size:.78rem;
-    color:var(--morado);margin-bottom:22px;font-weight:600;
-  }
-  .hero h1{
-    font-family:'Fraunces',Georgia,serif;font-weight:700;
-    font-size:clamp(3.2rem,13vw,7rem);line-height:.95;letter-spacing:-.01em;
-    text-transform:uppercase;margin-bottom:22px;
-    background:linear-gradient(100deg,var(--azul),var(--morado) 50%,var(--magenta));
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  .hero p{color:var(--suave);font-size:1.08rem;max-width:560px;margin:0 auto 40px}
-  .btn-primary{
-    background:var(--morado);color:#fff;border:none;border-radius:0;
-    font-family:inherit;font-size:1rem;font-weight:600;
-    letter-spacing:.14em;text-transform:uppercase;
-    padding:18px 54px;cursor:pointer;
-    transition:background .25s ease,transform .2s ease;
-  }
-  a.btn-primary{display:inline-block;text-decoration:none}
-  .btn-primary:hover{background:var(--magenta);transform:translateY(-2px)}
-
-  /* SERVICIOS */
-  .services{padding:88px 24px;max-width:1120px;margin:0 auto}
-  .services h2{
-    text-align:center;font-family:'Fraunces',Georgia,serif;font-weight:600;
-    font-size:clamp(1.7rem,4.5vw,2.5rem);line-height:1.2;
-    color:var(--azul);margin-bottom:14px;
-  }
-  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .services h2{color:#fff}}
-  :root[data-theme="dark"] .services h2{color:#fff}
-  .services > p{text-align:center;max-width:600px;margin:0 auto 54px;color:var(--suave)}
-  .cards{display:flex;gap:24px;flex-wrap:wrap;justify-content:center}
-  .card{
-    background:var(--card);padding:34px 30px;width:330px;
-    border:1px solid var(--linea);border-top:3px solid var(--morado);
-    display:flex;flex-direction:column;
-    transition:transform .3s ease,box-shadow .3s ease,border-top-color .3s ease;
-  }
-  .card:nth-child(2){border-top-color:var(--magenta)}
-  .card:nth-child(3){border-top-color:var(--azul)}
-  .card:hover{transform:translateY(-6px);box-shadow:0 18px 38px rgba(20,18,58,.12)}
-  .card h3{
-    font-family:'Fraunces',Georgia,serif;font-weight:600;
-    font-size:1.3rem;color:var(--texto);margin-bottom:12px;
-  }
-  .highlight{
-    align-self:flex-start;text-transform:uppercase;letter-spacing:.14em;
-    font-size:.7rem;font-weight:600;color:var(--morado);
-    border:1px solid var(--linea);padding:5px 12px;margin-bottom:16px;
-  }
-  .card p.description{color:var(--suave);font-size:.96rem;flex:1}
-  .card-action{
-    margin-top:24px;background:transparent;color:var(--morado);
-    border:1px solid var(--morado);font-family:inherit;font-weight:600;
-    font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;
-    padding:13px;cursor:pointer;transition:background .25s ease,color .25s ease;
-  }
-  .card-action:hover{background:var(--morado);color:#fff}
-  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .card-action,
-    :root:not([data-theme="light"]) .highlight{color:#c9a6e8;border-color:#c9a6e8}}
-
-  footer{
-    background:var(--azul);color:rgba(255,255,255,.8);
-    text-align:center;padding:34px 20px;font-size:.88rem;letter-spacing:.03em;
-  }
-
-  @media (max-width:768px){
-    nav,.overlay-top{padding:14px 18px}
-    .hero{padding:66px 18px 74px}
-    .overlay a{padding:20px 18px}
-  }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<nav>
-  <div class="logo">MedLoop</div>
-  <button class="menu-btn" id="menuBtn" aria-expanded="false">Menú</button>
-</nav>
+<a class="skip" href="#servicios">Saltar al contenido</a>
 
-<div class="backdrop" id="backdrop"></div>
-<div class="overlay" id="overlay">
-  <div class="overlay-top">
-    <div class="logo">MedLoop</div>
-    <button class="close-btn" id="closeBtn">Cerrar ✕</button>
+<div class="utilidades">
+  <div class="contenedor">
+    <ul>
+      <li><a href="#servicios">Información para pacientes</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <ul>
+      <li><a class="sesion" href="login.html">Iniciar sesión</a></li>
+    </ul>
   </div>
-  <a href="#inicio">Inicio</a>
-  <a href="login.html">Iniciar sesión</a>
-  <a href="#servicios">Ayuda</a>
-  <a href="#contacto">Contacto</a>
-  <a href="#servicios">Información para pacientes</a>
 </div>
 
-<section class="hero" id="inicio">
-  <p class="eyebrow">Seguimiento de pacientes en tiempo real</p>
-  <h1>MedLoop</h1>
-  <p>Acompaña el tratamiento de tu familiar, estés donde estés. En tiempo real y sin tecnicismos.</p>
-  <a class="btn-primary" id="empezar" href="login.html">Empezar</a>
-</section>
-
-<section class="services" id="servicios">
-  <h2>Asegúrate de cuidar a tus pacientes con MedLoop</h2>
-  <p>Entra directo a las funciones de la app: sigue la ruta de tratamiento, recibe alertas y entiende cada término médico.</p>
-  <div class="cards">
-    <div class="card">
-      <h3>Ruta de tratamiento</h3>
-      <span class="highlight">Paso a paso</span>
-      <p class="description">Cada estudio, medicamento y procedimiento aparece como una etapa que se marca con un check apenas se completa, para que sepas exactamente en qué punto va el proceso.</p>
-      <button class="card-action">Ver ruta del paciente</button>
-    </div>
-    <div class="card">
-      <h3>Alertas de emergencia</h3>
-      <span class="highlight">Inmediatas</span>
-      <p class="description">Recibe avisos instantáneos ante cualquier situación urgente relacionada con el paciente, sin demoras ni llamadas perdidas.</p>
-      <button class="card-action">Configurar mis alertas</button>
-    </div>
-    <div class="card">
-      <h3>Traductor médico con IA</h3>
-      <span class="highlight">Lenguaje claro</span>
-      <p class="description">La IA lee cada etapa de la ruta y la traduce a un lenguaje claro: explica qué es cada medicamento, procedimiento o término médico, sin conocimientos clínicos.</p>
-      <button class="card-action">Preguntar a la IA</button>
-    </div>
+<header class="cabecera">
+  <div class="contenedor">
+    <a class="marca" href="index.html">MedLoop</a>
+    <button class="btn-menu" id="btnMenu" aria-expanded="false" aria-controls="menu">Menú</button>
+    <nav class="menu-principal" id="menu" aria-label="Principal">
+      <ul>
+        <li><a href="index.html" aria-current="page">Inicio</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#servicios">Ayuda</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="login.html">Iniciar sesión</a></li>
+      </ul>
+    </nav>
   </div>
-</section>
+</header>
 
-<footer id="contacto">
-  <p>&copy; 2026 MedLoop. Todos los derechos reservados.</p>
+<main>
+  <section class="portada" id="inicio">
+    <div class="contenedor">
+      <div>
+        <h1>Acompaña el tratamiento de tu familiar, estés donde estés</h1>
+        <p>Seguimiento de pacientes en tiempo real y sin tecnicismos.</p>
+        <div class="acciones">
+          <a class="btn btn-claro" href="login.html">Empezar</a>
+          <a class="btn btn-borde" href="#servicios">Ver qué puedes hacer</a>
+        </div>
+      </div>
+
+      <!-- Ejemplo visual de la ruta de tratamiento (decorativo) -->
+      <div class="ruta-demo" aria-hidden="true">
+        <h2>Ruta de tratamiento</h2>
+        <p class="sub">Ejemplo de cómo verás el avance</p>
+        <ol>
+          <li class="hecho"><span class="punto">✓</span> Análisis de sangre</li>
+          <li class="hecho"><span class="punto">✓</span> Tomografía</li>
+          <li class="actual"><span class="punto"></span> Administración de medicamento</li>
+          <li class="pendiente"><span class="punto"></span> Revisión con el médico</li>
+          <li class="pendiente"><span class="punto"></span> Alta</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion-gris" id="servicios">
+    <div class="contenedor">
+      <div class="encabezado">
+        <h2>Asegúrate de cuidar a tus pacientes con MedLoop</h2>
+        <p>Entra directo a las funciones de la app: sigue la ruta de tratamiento, recibe alertas y entiende cada término médico.</p>
+      </div>
+
+      <div class="tarjetas">
+        <article class="tarjeta">
+          <span class="etiqueta">Paso a paso</span>
+          <h3>Ruta de tratamiento</h3>
+          <p>Cada estudio, medicamento y procedimiento aparece como una etapa que se marca con un check apenas se completa, para que sepas exactamente en qué punto va el proceso.</p>
+          <a class="enlace-flecha" href="login.html">Ver ruta del paciente</a>
+        </article>
+
+        <article class="tarjeta">
+          <span class="etiqueta">Inmediatas</span>
+          <h3>Alertas de emergencia</h3>
+          <p>Recibe avisos instantáneos ante cualquier situación urgente relacionada con el paciente, sin demoras ni llamadas perdidas.</p>
+          <a class="enlace-flecha" href="login.html">Configurar mis alertas</a>
+        </article>
+
+        <article class="tarjeta">
+          <span class="etiqueta">Lenguaje claro</span>
+          <h3>Traductor médico con IA</h3>
+          <p>La IA lee cada etapa de la ruta y la traduce a un lenguaje claro: explica qué es cada medicamento, procedimiento o término médico, sin conocimientos clínicos.</p>
+          <a class="enlace-flecha" href="login.html">Preguntar a la IA</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="banda">
+    <div class="contenedor">
+      <h2>Empieza a seguir el tratamiento de tu familiar hoy</h2>
+      <a class="btn btn-claro" href="login.html">Iniciar sesión</a>
+    </div>
+  </section>
+</main>
+
+<footer class="pie" id="contacto">
+  <div class="contenedor">
+    <div class="columnas">
+      <div>
+        <a class="marca" href="index.html">MedLoop</a>
+        <p>Seguimiento de pacientes en tiempo real.</p>
+      </div>
+      <div>
+        <h2>Explorar</h2>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#servicios">Información para pacientes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Cuenta y soporte</h2>
+        <ul>
+          <li><a href="login.html">Iniciar sesión</a></li>
+          <li><a href="#servicios">Ayuda</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="legal">&copy; 2026 MedLoop. Todos los derechos reservados.</p>
+  </div>
 </footer>
 
-<script>
-  const ov = document.getElementById('overlay');
-  const bd = document.getElementById('backdrop');
-  const mb = document.getElementById('menuBtn');
-  const cb = document.getElementById('closeBtn');
-  const open = v => {
-    ov.classList.toggle('open', v);
-    bd.classList.toggle('open', v);
-    mb.setAttribute('aria-expanded', v);
-    document.body.style.overflow = v ? 'hidden' : '';
-  };
-  mb.addEventListener('click', () => open(true));
-  cb.addEventListener('click', () => open(false));
-  bd.addEventListener('click', () => open(false));
-  ov.querySelectorAll('a').forEach(a => a.addEventListener('click', () => open(false)));
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') open(false); });
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
 
