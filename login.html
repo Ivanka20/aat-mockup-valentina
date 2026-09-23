@@ -6,114 +6,96 @@
 <title>Iniciar sesión | MedLoop</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --azul:#060888;--morado:#450688;--magenta:#860688;
-    --papel:#f4f2f7;--card:#ffffff;--texto:#14123a;--suave:#5a5578;--linea:#e2dded;--error:#b00020;
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){--papel:#0a0920;--card:#141230;--texto:#f1eefa;--suave:#b9b2d4;--linea:#2a2650;--error:#ff8a9b}
-  }
-  :root[data-theme="dark"]{--papel:#0a0920;--card:#141230;--texto:#f1eefa;--suave:#b9b2d4;--linea:#2a2650;--error:#ff8a9b}
-
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:'Inter',-apple-system,'Segoe UI',Arial,sans-serif;background:var(--papel);color:var(--texto);line-height:1.6;min-height:100vh}
-  nav{display:flex;justify-content:space-between;align-items:center;background:var(--azul);padding:16px 30px}
-  nav a{color:#fff;text-decoration:none}
-  nav .logo{font-family:'Fraunces',Georgia,serif;font-size:1.35rem}
-  nav .back{font-size:.9rem;border:1px solid rgba(255,255,255,.45);padding:9px 16px}
-  nav .back:hover{background:rgba(255,255,255,.12)}
-
-  main{max-width:720px;margin:0 auto;padding:56px 24px 72px}
-  h1{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:clamp(2rem,6vw,2.8rem);line-height:1.1;color:var(--azul);margin-bottom:12px}
-  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) h1{color:#fff}}
-  :root[data-theme="dark"] h1{color:#fff}
-  .intro{color:var(--suave);margin-bottom:34px;max-width:52ch}
-
-  form{background:var(--card);border:1px solid var(--linea);border-top:3px solid var(--morado);padding:34px 30px}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:22px 20px}
-  .full{grid-column:1/-1}
-  label{display:block;font-size:.9rem;font-weight:600;margin-bottom:6px}
-  input{
-    width:100%;font:inherit;color:var(--texto);background:transparent;
-    border:1px solid var(--linea);border-radius:0;padding:12px 14px;
-  }
-  input::placeholder{color:var(--suave);opacity:.7}
-  input:focus-visible{outline:2px solid var(--morado);outline-offset:1px;border-color:var(--morado)}
-  input:user-invalid{border-color:var(--error)}
-  .hint{font-size:.8rem;color:var(--suave);margin-top:4px}
-  .btn{
-    margin-top:30px;width:100%;background:var(--morado);color:#fff;border:none;border-radius:0;
-    font:inherit;font-weight:600;font-size:1rem;letter-spacing:.06em;padding:16px;cursor:pointer;
-    transition:background .25s ease;
-  }
-  .btn:hover{background:var(--magenta)}
-  .btn:focus-visible{outline:2px solid var(--azul);outline-offset:3px}
-  .ok{display:none;margin-top:22px;padding:14px 16px;border-left:3px solid var(--magenta);background:var(--papel);font-size:.95rem}
-  .ok.show{display:block}
-
-  @media (max-width:600px){
-    nav{padding:14px 18px}
-    main{padding:36px 16px 56px}
-    form{padding:26px 18px}
-    .grid{grid-template-columns:1fr}
-  }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="pagina-formulario">
 
-<nav>
-  <a class="logo" href="index.html">MedLoop</a>
-  <a class="back" href="index.html">Volver al inicio</a>
-</nav>
+<a class="skip" href="#contenido">Saltar al contenido</a>
 
-<main>
-  <h1>Iniciar sesión</h1>
-  <p class="intro">Ingresa los datos del paciente para acceder al seguimiento de su tratamiento.</p>
+<div class="utilidades">
+  <div class="contenedor">
+    <ul>
+      <li><a href="index.html#servicios">Información para pacientes</a></li>
+      <li><a href="index.html#contacto">Contacto</a></li>
+    </ul>
+    <ul>
+      <li><a class="sesion" href="index.html">Volver al inicio</a></li>
+    </ul>
+  </div>
+</div>
 
-  <form id="loginForm" novalidate>
-    <div class="grid">
-      <div>
-        <label for="id">ID</label>
-        <input id="id" name="id" type="text" required autocomplete="off" placeholder="Ej. P-10482">
-      </div>
-      <div>
-        <label for="edad">Edad</label>
-        <input id="edad" name="edad" type="number" required min="0" max="120" inputmode="numeric" placeholder="Años cumplidos">
-      </div>
-      <div>
-        <label for="nombre">Nombre</label>
-        <input id="nombre" name="nombre" type="text" required autocomplete="given-name">
-      </div>
-      <div>
-        <label for="apellidos">Apellidos</label>
-        <input id="apellidos" name="apellidos" type="text" required autocomplete="family-name">
-      </div>
-      <div class="full">
-        <label for="habitacion">Habitación</label>
-        <input id="habitacion" name="habitacion" type="text" required autocomplete="off" placeholder="Ej. 304-B">
-      </div>
-      <div>
-        <label for="correo">Correo electrónico</label>
-        <input id="correo" name="correo" type="email" required autocomplete="email" placeholder="nombre@correo.com">
-      </div>
-      <div>
-        <label for="telefono">Número de teléfono</label>
-        <input id="telefono" name="telefono" type="tel" required autocomplete="tel" inputmode="tel" pattern="[0-9+\s()\-]{8,20}" placeholder="55 1234 5678">
-      </div>
-      <div class="full">
-        <label for="emergencia">Contacto de emergencia</label>
-        <input id="emergencia" name="emergencia" type="text" required autocomplete="off" placeholder="Nombre y teléfono">
-        <p class="hint">Persona a quien avisaremos ante cualquier urgencia.</p>
-      </div>
-    </div>
+<header class="cabecera">
+  <div class="contenedor">
+    <a class="marca" href="index.html">MedLoop</a>
+    <button class="btn-menu" id="btnMenu" aria-expanded="false" aria-controls="menu">Menú</button>
+    <nav class="menu-principal" id="menu" aria-label="Principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="index.html#servicios">Servicios</a></li>
+        <li><a href="index.html#servicios">Ayuda</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+        <li><a href="login.html" aria-current="page">Iniciar sesión</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-    <button class="btn" type="submit">Iniciar sesión</button>
-    <p class="ok" id="ok" role="status">Datos recibidos. Entrando a MedLoop…</p>
-  </form>
+<main id="contenido">
+  <div class="contenedor estrecho">
+    <h1>Iniciar sesión</h1>
+    <p class="intro">Ingresa los datos del paciente para acceder al seguimiento de su tratamiento.</p>
+
+    <form class="datos" id="loginForm" novalidate>
+      <div class="grid">
+        <div>
+          <label for="id">ID</label>
+          <input id="id" name="id" type="text" required autocomplete="off" placeholder="Ej. P-10482">
+        </div>
+        <div>
+          <label for="edad">Edad</label>
+          <input id="edad" name="edad" type="number" required min="0" max="120" inputmode="numeric" placeholder="Años cumplidos">
+        </div>
+        <div>
+          <label for="nombre">Nombre</label>
+          <input id="nombre" name="nombre" type="text" required autocomplete="given-name">
+        </div>
+        <div>
+          <label for="apellidos">Apellidos</label>
+          <input id="apellidos" name="apellidos" type="text" required autocomplete="family-name">
+        </div>
+        <div class="full">
+          <label for="habitacion">Habitación</label>
+          <input id="habitacion" name="habitacion" type="text" required autocomplete="off" placeholder="Ej. 304-B">
+        </div>
+        <div>
+          <label for="correo">Correo electrónico</label>
+          <input id="correo" name="correo" type="email" required autocomplete="email" placeholder="nombre@correo.com">
+        </div>
+        <div>
+          <label for="telefono">Número de teléfono</label>
+          <input id="telefono" name="telefono" type="tel" required autocomplete="tel" inputmode="tel" pattern="[0-9+\s()\-]{8,20}" placeholder="55 1234 5678">
+        </div>
+        <div class="full">
+          <label for="emergencia">Contacto de emergencia</label>
+          <input id="emergencia" name="emergencia" type="text" required autocomplete="off" placeholder="Nombre y teléfono">
+          <p class="hint">Persona a quien avisaremos ante cualquier urgencia.</p>
+        </div>
+      </div>
+
+      <button class="btn btn-morado" type="submit">Iniciar sesión</button>
+      <p class="ok" id="ok" role="status">Datos recibidos. Entrando a MedLoop…</p>
+    </form>
+  </div>
 </main>
 
+<footer class="pie">
+  <div class="contenedor">
+    <p class="legal">&copy; 2026 MedLoop. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
 <script>
   const form = document.getElementById('loginForm');
   const ok = document.getElementById('ok');
@@ -124,6 +106,9 @@
     // TODO: enviar `datos` al servidor (fetch/POST) y redirigir al panel del paciente.
     ok.classList.add('show');
   });
+</script>
+</body>
+</html>
 </script>
 
 </body>
